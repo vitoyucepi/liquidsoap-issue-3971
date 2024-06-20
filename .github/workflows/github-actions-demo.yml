@@ -18,3 +18,7 @@ jobs:
           pwd
           ls -al
           liquidsoap main.liq
+      - uses: actions/upload-artifact@v4
+        with:
+          name: out
+          path: out.mp3
