@@ -13,4 +13,5 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends ffmpeg
           ffmpeg -f lavfi -i "sine=frequency=100:duration=2" -c:a libmp3lame -b:a 16k -y 1.mp3
+          find . -name 'main.liq'
           liquidsoap main.liq
