@@ -1,18 +1,15 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: CI
+on: 
+  - push
 jobs:
-  Explore-GitHub-Actions:
+  container-test-job:
     runs-on: ubuntu-latest
+    container:
+      image: savonet/liquidsoap:v2.2.5    
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Test
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          apt-get update
+          apt-get install -y --no-install-recommends ffmpeg
+          ffmpeg -f lavfi -i "sine=frequency=100:duration=2" -c:a libmp3lame -b:a 16k -y 1.mp3
+          liquidsoap main.liq
