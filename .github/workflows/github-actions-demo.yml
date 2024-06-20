@@ -7,6 +7,8 @@ jobs:
     container:
       image: savonet/liquidsoap:v2.2.5
       options: --user root
+      volumes:
+        - ./:/tmp/test
     steps:
       - name: Test
         run: |
