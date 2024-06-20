@@ -7,9 +7,8 @@ jobs:
     container:
       image: savonet/liquidsoap:v2.2.5
       options: --user root
-      volumes:
-        - ${{ github.workspace }}:/tmp/test
     steps:
+      - uses: actions/checkout@v4
       - name: Test
         run: |
           apt-get update
